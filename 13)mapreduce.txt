@@ -1,0 +1,19 @@
+//add to collection
+db.author.save({
+ "book_title" : "MongoDB Tutorial", "author_name" : "aparajita",
+ "status" : "active", "publish_year": "2016" })
+• > db.author.save({
+ "book_title" : "Software Testing Tutorial", "author_name" : "aparajita",
+ "status" : "active", "publish_year": "2015" })
+• > db.author.save({
+ "book_title" : "Node.js Tutorial", "author_name" : “Kritika",
+ "status" : "active", "publish_year": "2016" })
+• > db.author.save({
+ "book_title" : "PHP7 Tutorial", "author_name" : "aparajita",
+ "status" : “passive", "publish_year": "2016" })
+
+ //using map reduce
+ db.author.mapReduce(
+ function() { emit(this.author_name,1) },
+ function(key, values) {return Array.sum(values)},
+ { query:{status:"active"}, out:"author_total" } ).find()

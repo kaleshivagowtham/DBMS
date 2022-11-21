@@ -1,0 +1,23 @@
+set autoprint on;
+ set serveroutput on;
+  set verify off;
+    declare  cursor cu1 is select Roll,Name from Student;
+      cursor cu2 is select Roll from CompDep;
+        rno int;
+         nm varchar(20);
+          rno2 int;
+        begin  
+        open cu1; 
+        open cu2;  
+        loop  
+        fetch cu1 into rno,nm; 
+        fetch cu2 into rno2;  
+        exit when cu1%found = false; 
+        if rno2 <> rno then
+         insert into CompDep values(rno,nm); 
+        end if;
+        end loop;
+        close cu1; 
+        close cu2;  
+end; 
+/
