@@ -1,0 +1,18 @@
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.MongoClient;
+
+public class Demo {
+    public static void main(String[] args){
+        try{
+            MongoClient mongoClient = new MongoClient("localhost",27017);
+            DB db = mongoClient.getDB("student");
+            System.out.print("Connection established on port:27017...");
+            DBCollection coll = db.getCollection("student");
+        }
+        catch(Exception err){
+            System.out.print("There was an error");
+        }
+        System.out.print("Connection ready...")
+        }
+}
